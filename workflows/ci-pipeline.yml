@@ -1,0 +1,37 @@
+name: Portfolio CI Pipeline
+
+# 1. When should this pipeline run?
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# 2. What jobs should it do?
+jobs:
+  build-and-check:
+    name: Build and Check Backend
+    # 3. Spin up a temporary Ubuntu Linux server
+    runs-on: ubuntu-latest
+
+    # 4. The step-by-step instructions
+    steps:
+      # Step A: Download your code into the temporary server
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step B: Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x' # Using a stable version of Node
+
+      # Step C: Go to the backend and install your dependencies
+      - name: Install Dependencies
+        working-directory: ./backend
+        run: npm install
+
+      # Step D: Run a basic test to make sure it doesn't crash
+      - name: Run Tests
+        working-directory: ./backend
+        run: npm test
