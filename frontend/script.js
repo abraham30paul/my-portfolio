@@ -9,7 +9,7 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
     statusText.innerText = "Sending...";
 
     // Replace this with your actual Railway URL later!
-    const API_URL = "http://localhost:3000/api/feedback"; 
+    const API_URL = "https://my-portfolio-m5w5.onrender.com"; 
 
     try {
         const response = await fetch(API_URL, {
